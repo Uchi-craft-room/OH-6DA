@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<path>tach.ac</path>
+
+
+
+  <animation>
+    <type>material</type>
+    <object-name>TurbineNeedle1</object-name>
+    <object-name>TurbineNeedle2</object-name>
+    <object-name>RotorNeedle</object-name>
+    <object-name>Face</object-name>
+    <emission>
+      <factor-prop>systems/electrical/outputs/instrument-lights-norm</factor-prop>
+      <red>   0.50 </red>
+      <green> 0.25 </green>
+      <blue>  0.25 </blue>
+    </emission> 
+  </animation> 
+
+	<animation>
+		<type>rotate</type>
+		<object-name>TurbineNeedle1</object-name>
+		<property>engines/engine[0]/n2-pct</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>35</dep></entry>
+			<entry><ind>50</ind><dep>151</dep></entry>
+			<entry><ind>100</ind><dep>270</dep></entry>
+			<entry><ind>120</ind><dep>3150</dep></entry>
+		</interpolation>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RotorNeedle</object-name>
+		<property>rotors/main/rpm</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>35</dep></entry>
+			<entry><ind>250</ind><dep>151</dep></entry>
+			<entry><ind>500</ind><dep>270</dep></entry>
+			<entry><ind>600</ind><dep>315</dep></entry>
+		</interpolation>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+</PropertyList>
+

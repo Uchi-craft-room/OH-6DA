@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <path>OH-6DA.ac</path>
+
+	<particlesystem>
+		<name>dirt</name>
+		<texture>dirt.rgb</texture>
+		<emissive>false</emissive>
+		<lighting>false</lighting>
+
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>-2.0</z-m>
+			<roll-deg>90</roll-deg>
+		</offsets>
+
+		<attach>world</attach>
+
+		<placer>
+			<type>point</type>
+		</placer>
+
+		<condition>
+			<property>sim/model/bo105/particles/enabled</property>
+			<not>
+				<property>sim/paused</property>
+			</not>
+			<not>
+				<property>sim/crashed</property>
+			</not>
+			<less-than>
+				<property>position/altitude-agl-ft</property>
+				<value>10</value>
+			</less-than>
+			<greater-than>
+				<property>rotors/main/rpm</property>
+				<value>300</value>
+			</greater-than>
+		</condition>
+
+		<shooter>
+			<theta-min-deg>0</theta-min-deg>
+			<theta-max-deg>360</theta-max-deg>
+			<phi-min-deg>-0.1</phi-min-deg>
+			<phi-max-deg>0.1</phi-max-deg>
+			<speed-mps>
+				<property>rotors/main/rpm</property>
+				<factor>0.1</factor>
+				<spread>2</spread>
+			</speed-mps>
+			<rotation-speed>
+				<x-min-deg-sec>0</x-min-deg-sec>
+				<y-min-deg-sec>0</y-min-deg-sec>
+				<z-min-deg-sec>0</z-min-deg-sec>
+				<x-max-deg-sec>0</x-max-deg-sec>
+				<y-max-deg-sec>0</y-max-deg-sec>
+				<z-max-deg-sec>0</z-max-deg-sec>
+			</rotation-speed>
+		</shooter>
+
+		<counter>
+			<particles-per-sec>
+				<property>position/altitude-agl-ft</property>
+				<factor>-80</factor>
+				<offset-m>1000</offset-m>
+			</particles-per-sec>
+		</counter>
+
+		<align>billboard</align>
+
+		<particle>
+			<start>
+				<color>
+					<red>
+						<value>0.6</value>
+					</red>
+					<green>
+						<value>0.6</value>
+					</green>
+					<blue>
+						<value>0.6</value>
+					</blue>
+					<alpha>
+						<property>rotors/main/rpm</property>
+						<factor>0.00004</factor>
+						<max>0.002</max>
+					</alpha>
+				</color>
+				<size>
+					<value>0.4</value>
+				</size>
+			</start>
+
+			<end>
+				<color>
+					<red>
+						<value>0.7</value>
+					</red>
+					<green>
+						<value>0.7</value>
+					</green>
+					<blue>
+						<value>0.6</value>
+					</blue>
+					<alpha>
+						<property>rotors/main/rpm</property>
+						<factor>0.0002</factor>
+						<max>0.004</max>
+					</alpha>
+				</color>
+				<size>
+					<value>1.2</value>
+				</size>
+			</end>
+
+			<life-sec>
+				<value>0.1</value>
+			</life-sec>
+			<mass-kg>0.01</mass-kg>
+			<radius-m>0.01</radius-m>
+		</particle>
+
+		<program>
+			<fluid>water</fluid>
+			<gravity>true</gravity>
+			<wind>false</wind>
+		</program>
+	</particlesystem>
+
+   <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+     <object-name>tailrotorBlow</object-name>
+   </effect>
+
+ 
+  <animation>
+    <type>shader</type>
+    <shader>chrome</shader>
+    <texture>glass_shader.png</texture>
+    <object-name>glass</object-name>
+    <object-name>FRDR-glass-RH</object-name>
+    <object-name>FRDR-glass-LH</object-name>
+    <object-name>RRDR-glass-RH</object-name>
+    <object-name>RRDR-glass-LH</object-name>
+  </animation>
+
+  <animation>
+    <type>noshadow</type>
+    <object-name>glass</object-name>
+    <object-name>FRDR-glass-RH</object-name>
+    <object-name>FRDR-glass-LH</object-name>
+    <object-name>RRDR-glass-RH</object-name>
+    <object-name>RRDR-glass-LH</object-name>
+  </animation>
+
+
+<!-- MAIN ROTOR --> 
+  <model>
+  <name>MAINROTOR</name>
+    <path>Aircraft/OH-6DA/Models/Rotor/rotor.xml</path>
+    <offsets>
+      <x-m> 0 </x-m>
+      <y-m> 0 </y-m>
+      <z-m> 0 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   -2 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+	<type>rotate</type>
+	<object-name>MAINROTOR</object-name>
+        <property>controls/flight/elevator</property>
+        <factor>2</factor>
+	<center>
+		<x-m>-0.004</x-m>
+		<y-m>-0.000</y-m>
+		<z-m> 0.665</z-m>
+	</center>
+	<axis>
+		<x>0</x>
+		<y>-1</y>
+		<z>0</z>
+	</axis>
+   </animation>
+
+  <animation>
+        <type>rotate</type>
+        <object-name>MAINROTOR</object-name>
+	<property>controls/flight/aileron</property>
+        <factor>2</factor>
+	<center>
+		<x-m>-0.004</x-m>
+		<y-m>-0.000</y-m>
+		<z-m> 0.665</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+		<y>0</y>
+		<z>0</z>
+	</axis>
+   </animation>
+
+<!-- TAIL ROTOR -->
+  <animation>
+	<type>rotate</type>
+	<object-name>tailrotor1</object-name>
+        <object-name>tailrotor2</object-name>
+        <object-name>tailrotorBlow</object-name>
+	<property>rotors/tail/blade/position-deg</property>
+	<center>
+		<x-m>4.651</x-m>
+		<y-m>-0.298</y-m>
+		<z-m>0.0</z-m>
+	</center>
+	<axis>
+		<x>0</x>
+		<y>-1</y>
+		<z>0</z>
+	</axis>
+   </animation>
+
+
+   <animation>
+    <type>rotate</type>
+	<object-name>tailrotor1</object-name>
+	  <property>rotors/tail/blade/incidence-deg</property>
+	  <center>
+		<x-m>4.651</x-m>
+		<y-m>-0.298</y-m>
+		<z-m>0.0</z-m>
+	  </center>
+	  <axis>
+	    <x>0</x>
+	    <y>0</y>
+	    <z>-1</z>
+	  </axis>
+  </animation>
+
+
+   <animation>
+    <type>rotate</type>
+	<object-name>tailrotor2</object-name>
+	  <property>rotors/tail/blade/incidence-deg</property>
+	  <center>
+		<x-m>4.651</x-m>
+		<y-m>-0.298</y-m>
+		<z-m>0.0</z-m>
+	  </center>
+	  <axis>
+	    <x>0</x>
+	    <y>0</y>
+	    <z>1</z>
+	  </axis>
+  </animation>
+
+
+  <animation>
+    <type>select</type>
+        <object-name>tailrotorBlow</object-name>
+    <condition>
+   <and>
+     <greater-than>
+       <property>rotors/tail/rpm</property>
+       <value>1000</value>
+     </greater-than>
+    </and>
+    </condition>
+  </animation>
+
+
+<!-- Pushback -->
+<model>
+ <name>Pushback</name>
+ <path>Aircraft/OH-6DA/Models/towing_car/towing_car.xml</path>
+  <condition>
+ <less-than-equals>
+     <property>velocities/airspeed-kt</property>
+     <value>80</value>
+ </less-than-equals>
+  </condition>
+   <offsets>
+            <x-m> 3.4</x-m>
+            <y-m>-0.00</y-m>
+            <z-m>-1.6</z-m>
+ </offsets>
+</model> 
+
+<!-- Trailer -->
+<model>
+ <name>Trailer</name>
+ <path>Aircraft/OH-6DA/Models/trailer/trailer.xml</path>
+  <condition>
+ <less-than-equals>
+     <property>velocities/airspeed-kt</property>
+     <value>80</value>
+ </less-than-equals>
+  </condition>
+   <offsets>
+            <x-m>-0 </x-m>
+            <y-m>-0 </y-m>
+            <z-m>-1.6 </z-m>
+ </offsets>
+</model> 
+
+  <!-- Interior -->
+  <model>
+    <path>Aircraft/OH-6DA/Models/Interior/panel.xml</path>
+    <offsets>
+      <x-m> 0.708 </x-m>
+      <y-m> 0 </y-m>
+      <z-m> -0.85 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+
+  <!-- Immatriculatoin
+  <model>
+    <path>Aircraft/OH-6DA/Models/Immat/immat.xml</path>
+    <offsets>
+      <x-m> 0 </x-m>
+      <y-m> 0 </y-m>
+      <z-m> 0 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model> -->
+
+
+  <!-- Une ombre pour OSG -->
+  <model>
+    <name>shadowOSG</name>
+    <path>Aircraft/OH-6DA/Models/shadow.xml</path>
+    <offsets>
+      <x-m> 0.9 </x-m>
+      <y-m> 0.2 </y-m>
+      <z-m> -0.55 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+ <animation>
+    <type>select</type>
+    <object-name>shadowOSG</object-name>
+    <condition>
+      <equals>
+        <property>/sim/rendering/rembrandt/enabled</property>
+        <value>false</value>
+      </equals>
+    </condition>
+  </animation>
+
+
+<!-- PILOT -->
+  <model>
+    <name>PILOT</name>
+    <path>Aircraft/OH-6DA/Models/Pilot/pilot.xml</path>
+    <offsets>
+      <x-m> -0.68 </x-m>
+      <y-m> 0.29 </y-m>
+      <z-m> -0.50 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>COPILOT</name>
+    <path>Aircraft/OH-6DA/Models/Pilot/tourpilot.xml</path>
+    <offsets>
+      <x-m> -0.68 </x-m>
+      <y-m> -0.29 </y-m>
+      <z-m> -0.50 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+
+
+  <!-- Doors -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>FRDR-glass-RH</object-name>
+    <object-name>RH-door-ext</object-name>
+    <object-name>RH-door-int</object-name>
+    <object-name>RH-door-ws</object-name>
+    <object-name>RH-FR-handle</object-name>
+    <property>instrumentation/doors/crew/position-norm</property>
+    <interpolation>
+      <entry><ind> 0.00 </ind><dep> 0 </dep></entry>
+      <entry><ind> 0.10 </ind><dep> 0 </dep></entry>
+      <entry><ind> 0.20 </ind><dep> 5 </dep></entry>
+      <entry><ind> 0.50 </ind><dep> 65 </dep></entry>
+      <entry><ind> 1.00 </ind><dep> 65 </dep></entry>
+    </interpolation>
+    <center>
+	<x-m>-1.396</x-m>
+	<y-m>0.620</y-m>
+	<z-m>0.0</z-m>
+    </center>
+    <axis>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> 1 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>FRDR-glass-LH</object-name>
+    <object-name>LH-door-ext</object-name>
+    <object-name>LH-door-int</object-name>
+    <object-name>LH-door-ws</object-name>
+    <object-name>LH-FR-handle</object-name>
+    <property>instrumentation/doors/crew/position-norm</property>
+    <interpolation>
+      <entry><ind> 0.00 </ind><dep> 0 </dep></entry>
+      <entry><ind> 0.10 </ind><dep> 0 </dep></entry>
+      <entry><ind> 0.50 </ind><dep> 0 </dep></entry>
+      <entry><ind> 1.00 </ind><dep> 65 </dep></entry>
+    </interpolation>
+    <center>
+	<x-m>-1.396</x-m>
+	<y-m>-0.620</y-m>
+	<z-m>0.0</z-m>
+    </center>
+    <axis>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> -1 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>RH-FR-handle</object-name>
+    <object-name>LH-FR-handle</object-name>
+    <property>instrumentation/doors/crew/position-norm</property>
+    <interpolation>
+      <entry><ind> 0.00 </ind><dep> 0 </dep></entry>
+      <entry><ind> 0.10 </ind><dep> 70 </dep></entry>
+      <entry><ind> 1.00 </ind><dep> 70 </dep></entry>
+    </interpolation>
+    <center>
+	<x-m>-0.621</x-m>
+	<y-m>0.676</y-m>
+	<z-m>-0.462</z-m>
+    </center>
+    <axis>
+      <x> 0 </x>
+      <y> -1 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <!-- Ajout des effets lumineux -->
+  <model>
+    <path>Aircraft/OH-6DA/Models/light/RedLight.xml</path>
+    <offsets>
+      <x-m> -1.85 </x-m>
+      <y-m> -0.9 </y-m>
+      <z-m> -1.5</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/OH-6DA/Models/light/GreenLight.xml</path>
+    <offsets>
+      <x-m> -1.85 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m> -1.5 </z-m>
+    </offsets>
+  </model>
+
+
+
+  <model>
+  <name>Tail-Light</name>
+    <path>Aircraft/OH-6DA/Models/light/TailLight.xml</path>
+    <offsets>
+      <x-m> 4.93 </x-m>
+      <y-m>  0.12 </y-m>
+      <z-m> 1.05 </z-m>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>Tail-Light</object-name>
+    <condition>
+          <property>controls/lighting/nav-lights</property>
+    </condition>
+  </animation> 
+
+<!-- anti-collision light cone--> 
+
+  <model>
+  <name>Tail-Light</name>
+    <path>Aircraft/OH-6DA/Models/light/anticollision_beacon2.xml</path>
+    <offsets>
+      <x-m> 4.65 </x-m>
+      <y-m>  0.12 </y-m>
+      <z-m> 0.25 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+  <name>anticollision-cone1</name>
+    <path>Aircraft/OH-6DA/Models/light/anticollision-cone.xml</path>
+    <offsets>
+      <x-m> 4.65 </x-m>
+      <y-m>  0.12 </y-m>
+      <z-m> 0.25 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+  <name>anticollision-Light1</name>
+    <path>Aircraft/OH-6DA/Models/light/anticollision_beacon2.xml</path>
+    <offsets>
+      <x-m> 4.65 </x-m>
+      <y-m>  0.12 </y-m>
+      <z-m> 0.25 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+  <name>anticollision-cone2</name>
+    <path>Aircraft/OH-6DA/Models/light/anticollision-cone.xml</path>
+    <offsets>
+      <x-m>  -0.9 </x-m>
+      <y-m> -0.27 </y-m>
+      <z-m> -1.25 </z-m>
+    </offsets>
+  </model>
+
+
+  <model>
+  <name>anticollision-Light2</name>
+    <path>Aircraft/OH-6DA/Models/light/anticollision_beacon2.xml</path>
+    <offsets>
+      <x-m>  -0.9 </x-m>
+      <y-m> -0.27 </y-m>
+      <z-m> -1.25 </z-m>
+    </offsets>
+  </model>
+
+
+  <!--  light cone -->
+  <model>
+    <name>Landing-Light</name>
+    <path>Aircraft/OH-6DA/Models/light/light-cone.xml</path>
+    <offsets>
+      <x-m> -1.80</x-m>
+      <y-m>  0.00 </y-m>
+      <z-m> -1.00 </z-m>
+      <pitch-deg> -15.00 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>Landing-Light</object-name>
+    <condition>
+        <equals>
+          <property>controls/switches/landing-light</property>
+          <value> 1 </value>
+        </equals>
+    </condition>
+  </animation> 
+
+<!-- Wing light cone--> 
+  <model>
+    <name>LandingLight</name>
+   <path>Aircraft/OH-6DA/Models/light/Landinglight.xml</path>
+    <offsets>
+      <x-m> -1.80</x-m>
+      <y-m>  0.00 </y-m>
+      <z-m>  -1.00 </z-m>
+      <pitch-deg> -15.00 </pitch-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>LandingLight</object-name>
+    <condition>
+        <equals>
+          <property>controls/switches/landing-light</property>
+          <value> 1 </value>
+        </equals>
+    </condition>
+  </animation>
+ 
+
+</PropertyList>
+

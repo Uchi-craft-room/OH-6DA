@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+ <path>caution.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>caution1</object-name>
+    <object-name>caution2</object-name>
+    <object-name>caution3</object-name>
+    <object-name>caution4</object-name>
+    <object-name>caution5</object-name>
+    <object-name>caution6</object-name>
+    <object-name>caution7</object-name>
+    <object-name>caution8</object-name>
+    <object-name>caution9</object-name>
+    <object-name>caution10</object-name>
+    <object-name>caution11</object-name>
+    <object-name>caution12</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+    </emission> 
+  </animation> 
+
+
+<!-- ENGINE OUT -->
+  <animation>
+    <type>select</type>
+    <object-name>caution1</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>engines/engine/n2-pct</property>
+       <value>60</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- ENGINE CHIP DETECT -->
+  <animation>
+    <type>select</type>
+    <object-name>caution2</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>engines/engine/n1-pct</property>
+       <value>90</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- FUEL SUPPLY -->
+  <animation>
+    <type>select</type>
+    <object-name>caution3</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <property>consumables/fuel/tank/empty</property>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- FUEL LOW -->
+  <animation>
+    <type>select</type>
+    <object-name>caution4</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>consumables/fuel/total-fuel-lbs</property>
+       <value>50</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- GEN OUT -->
+  <animation>
+    <type>select</type>
+    <object-name>caution5</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>systems/electrical/gen-load</property>
+       <value>0.1</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- BATT VOLT LOW -->
+  <animation>
+    <type>select</type>
+    <object-name>caution6</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>24</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+<!-- LOW ROTOR RPM -->
+  <animation>
+    <type>select</type>
+    <object-name>caution7</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>rotors/main/rpm</property>
+       <value>450</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- MAIN ROTOR CHIP DETECT -->
+  <animation>
+    <type>select</type>
+    <object-name>caution8</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>rotors/main/rpm</property>
+       <value>10</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- MAIN ROTOR BRAKE -->
+  <animation>
+    <type>select</type>
+    <object-name>caution9</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <greater-than>
+       <property>controls/rotor/brake</property>
+       <value>0.1</value>
+     </greater-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- MAIN ROTOR OIL PRESSURE -->
+  <animation>
+    <type>select</type>
+    <object-name>caution10</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>engines/engine[0]/rpm</property>
+       <value>1500</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- TAIL ROTOR CHIP DETECT -->
+  <animation>
+    <type>select</type>
+    <object-name>caution11</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <less-than>
+       <property>rotors/tail/rpm</property>
+       <value>10</value>
+     </less-than>
+    </and>
+   </condition>
+  </animation>
+
+
+<!-- DOOR OPEN -->
+  <animation>
+    <type>select</type>
+    <object-name>caution12</object-name>
+  <condition>
+   <and>
+     <greater-than>
+       <property>systems/electrical/batt-volts</property>
+       <value>0.1</value>
+     </greater-than>
+     <greater-than>
+       <property>instrumentation/doors/crew/position-norm</property>
+       <value>0.05</value>
+     </greater-than>
+    </and>
+   </condition>
+  </animation>
+
+
+</PropertyList>
+
+
+

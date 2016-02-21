@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList include="OH-6DA-base.xml">
+
+  <sim>
+
+    <description>OH-6DA (YASim)</description>
+    <author>Hitoshi Uchida (3D/FDM)</author>
+    <flight-model archive="y">yasim</flight-model>
+    <aero archive="y">OH-6DA-yasim</aero>
+
+  </sim>
+
+</PropertyList>
+
+

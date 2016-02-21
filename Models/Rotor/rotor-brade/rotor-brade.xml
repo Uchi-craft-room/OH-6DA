@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <path>rotor-brade.ac</path>
+
+  <animation>
+          <object-name>mainrotor_rod</object-name>
+	  <object-name>mainrotor_0</object-name>
+          <object-name>mainrotor_1</object-name>
+          <object-name>mainrotor_2</object-name>
+	  <object-name>Prop_0</object-name>
+          <object-name>Prop_1</object-name>
+          <object-name>Prop_2</object-name>
+	  <object-name>PropH_0</object-name>
+          <object-name>PropH_1</object-name>
+          <object-name>PropH_2</object-name>
+  </animation>
+
+   <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+	  <object-name>Prop_0</object-name>
+          <object-name>Prop_1</object-name>
+          <object-name>Prop_2</object-name>
+	  <object-name>PropH_0</object-name>
+          <object-name>PropH_1</object-name>
+          <object-name>PropH_2</object-name>
+   </effect>
+
+   <animation>
+    <type>rotate</type>
+	  <object-name>mainrotor_0</object-name>
+          <object-name>mainrotor_1</object-name>
+          <object-name>mainrotor_2</object-name>
+	  <property>rotors/main/blade/incidence-deg</property>
+	  <center>
+	    <x-m>-0.023</x-m>
+	    <y-m>-0.007</y-m>
+	    <z-m>0.730</z-m>
+	  </center>
+	  <axis>
+	    <x>-1</x>
+	    <y>0</y>
+	    <z>0</z>
+	  </axis>
+  </animation>
+
+   <animation>
+    <type>rotate</type>
+          <object-name>mainrotor_1</object-name>
+          <object-name>mainrotor_2</object-name>
+          <object-name>Prop_1</object-name>
+          <object-name>Prop_2</object-name>
+          <object-name>PropH_1</object-name>
+          <object-name>PropH_2</object-name>
+	  <property>rotors/main/cone-deg</property>
+	   <interpolation>
+		<entry> <ind> 1 </ind>  <dep> 2</dep>  </entry>
+		<entry> <ind> 0 </ind>  <dep> 0</dep>  </entry>
+		<entry> <ind>-5 </ind>  <dep>-2</dep> </entry>
+	   </interpolation>
+	  <center>
+	    <x-m>-1.269</x-m>
+	    <y-m>0.004</y-m>
+	    <z-m>0.737</z-m>
+	  </center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+  </animation>
+
+
+   <animation>
+    <type>rotate</type>
+          <object-name>mainrotor_2</object-name>
+          <object-name>Prop_2</object-name>
+          <object-name>PropH_2</object-name>
+	  <property>rotors/main/cone-deg</property>
+	   <interpolation>
+		<entry> <ind>1</ind>   <dep>2</dep>   </entry>
+		<entry> <ind>0</ind> <dep>0</dep> </entry>
+		<entry> <ind>-5</ind> <dep>-2</dep> </entry>
+	   </interpolation>
+	  <center>
+	    <x-m>-2.918</x-m>
+	    <y-m>-0.039</y-m>
+	    <z-m>0.736</z-m>
+	  </center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+ </animation>
+
+  <animation>
+    <type>select</type>
+	  <object-name>Prop_0</object-name>
+          <object-name>Prop_1</object-name>
+          <object-name>Prop_2</object-name>
+    <condition>
+   <and>
+     <greater-than>
+       <property>rotors/main/rpm</property>
+       <value>200</value>
+     </greater-than>
+    </and>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+	  <object-name>PropH_0</object-name>
+          <object-name>PropH_1</object-name>
+          <object-name>PropH_2</object-name>
+    <condition>
+   <and>
+     <greater-than>
+       <property>rotors/main/rpm</property>
+       <value>400</value>
+     </greater-than>
+    </and>
+    </condition>
+  </animation>
+
+
+
+</PropertyList>
+

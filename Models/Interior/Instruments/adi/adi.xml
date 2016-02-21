@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <path>adi.ac</path>
+
+  <animation>
+    <object-name>fond</object-name>
+    <object-name>scale</object-name>
+    <object-name>aircraft</object-name>
+    <object-name>bouton</object-name>
+    <object-name>slip</object-name>
+    <object-name>sphere</object-name>
+    <object-name>off-flag</object-name>
+    <object-name>reticl</object-name>
+  </animation>
+
+
+	<animation>
+		<type>select</type>
+		<object-name>off-flag</object-name>
+		<condition>
+			<less-than>
+				<property>systems/electrical/volts</property>
+				<value>24</value>
+			</less-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>sphere</object-name>
+		<property>orientation/roll-deg</property>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>sphere</object-name>
+		<property>orientation/pitch-deg</property>
+		<center>
+			<x-m>-0.0522</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0023</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>slip</object-name>
+    <property>/orientation/roll-deg</property>
+    <factor>1.0</factor>
+    <axis>
+      <x>1.0</x>
+    </axis>
+  </animation>
+
+
+  <animation>
+    <type>material</type>
+    <object-name>scale</object-name>
+    <object-name>aircraft</object-name>
+    <object-name>slip</object-name>
+    <object-name>reticl</object-name>
+    <emission>
+      <factor-prop>systems/electrical/outputs/instrument-lights-norm</factor-prop>
+      <red>   0.50 </red>
+      <green> 0.25 </green>
+      <blue>  0.25 </blue>
+    </emission>
+  </animation>
+
+
+  <animation>
+    <type>material</type>
+    <object-name>sphere</object-name>
+    <object-name>off-flag</object-name>
+    <emission>
+      <red>   0.30 </red>
+      <green> 0.30 </green>
+      <blue>  0.30 </blue>
+    </emission>
+  </animation>
+
+
+
+</PropertyList>
+
+
