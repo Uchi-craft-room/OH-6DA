@@ -4,6 +4,69 @@
 
   <path>OH-6DA.ac</path>
 
+
+ <!-- Canopy -->
+    <animation>
+        <type>select</type>
+        <condition>
+            <not>
+                <property>/sim/rendering/rembrandt/enabled</property>
+            </not>
+        </condition>
+    <object-name>glass.001</object-name>
+    <object-name>FRDR-glass-RH.001</object-name>
+    <object-name>FRDR-glass-LH.001</object-name>
+    <object-name>RRDR-glass-RH.001</object-name>
+    <object-name>RRDR-glass-LH.001</object-name>
+    </animation>
+
+
+<!-- Uncomment this section for FG 3.5 ALS Glass effects -->
+    <effect>
+        <inherits-from>Effects/glass</inherits-from>
+    <object-name>glass.001</object-name>
+    <object-name>FRDR-glass-RH.001</object-name>
+    <object-name>FRDR-glass-LH.001</object-name>
+    <object-name>RRDR-glass-RH.001</object-name>
+    <object-name>RRDR-glass-LH.001</object-name>
+    </effect>
+
+
+<!--== particles ==on_solid-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>dirt</object-name>
+		<property>orientation/pitch-deg</property>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>dirt</object-name>
+		<property>orientation/roll-deg</property>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>dirt</object-name>
+		<property>position/gear-agl-m</property>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
 	<particlesystem>
 		<name>dirt</name>
 		<texture>dirt.rgb</texture>
@@ -33,12 +96,13 @@
 			</not>
 			<less-than>
 				<property>position/altitude-agl-ft</property>
-				<value>10</value>
+				<value>80</value>
 			</less-than>
 			<greater-than>
 				<property>rotors/main/rpm</property>
 				<value>300</value>
 			</greater-than>
+                        <property>gear/gear/ground-is-solid</property>
 		</condition>
 
 		<shooter>
@@ -126,6 +190,169 @@
 		<program>
 			<fluid>water</fluid>
 			<gravity>true</gravity>
+			<wind>false</wind>
+		</program>
+	</particlesystem>
+
+<!--== particles on water==-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>mist</object-name>
+		<property>orientation/pitch-deg</property>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>mist</object-name>
+		<property>orientation/roll-deg</property>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>mist</object-name>
+		<property>position/gear-agl-m</property>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+	<particlesystem>
+		<name>mist</name>
+		<texture>dirt.rgb</texture>
+		<emissive>false</emissive>
+		<lighting>false</lighting>
+
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>-2.0</z-m>
+			<roll-deg>90</roll-deg>
+		</offsets>
+
+		<attach>world</attach>
+
+		<placer>
+			<type>point</type>
+		</placer>
+
+		<condition>
+			<property>sim/model/bo105/particles/enabled</property>
+			<not>
+				<property>sim/paused</property>
+			</not>
+			<not>
+				<property>sim/crashed</property>
+			</not>
+			<less-than>
+				<property>position/altitude-agl-ft</property>
+				<value>200</value>
+			</less-than>
+			<greater-than>
+				<property>rotors/main/rpm</property>
+				<value>200</value>
+			</greater-than>
+                        <not>
+                                <property>gear/gear/ground-is-solid</property>
+                        </not>
+		</condition>
+
+		<shooter>
+			<theta-min-deg>0</theta-min-deg>
+			<theta-max-deg>360</theta-max-deg>
+			<phi-min-deg>-0.1</phi-min-deg>
+			<phi-max-deg>0.1</phi-max-deg>
+			<speed-mps>
+				<property>rotors/main/rpm</property>
+				<factor>0.1</factor>
+				<spread>2</spread>
+			</speed-mps>
+			<rotation-speed>
+				<x-min-deg-sec>0</x-min-deg-sec>
+				<y-min-deg-sec>0</y-min-deg-sec>
+				<z-min-deg-sec>0</z-min-deg-sec>
+				<x-max-deg-sec>0</x-max-deg-sec>
+				<y-max-deg-sec>0</y-max-deg-sec>
+				<z-max-deg-sec>0</z-max-deg-sec>
+			</rotation-speed>
+		</shooter>
+
+		<counter>
+			<particles-per-sec>
+				<property>position/altitude-agl-ft</property>
+				<factor>-40</factor>
+				<offset-m>2000</offset-m>
+			</particles-per-sec>
+		</counter>
+
+		<align>billboard</align>
+
+		<particle>
+			<start>
+				<color>
+					<red>
+						<value>0.8</value>
+					</red>
+					<green>
+						<value>0.8</value>
+					</green>
+					<blue>
+						<value>1.0</value>
+					</blue>
+					<alpha>
+						<property>rotors/main/rpm</property>
+						<factor>0.00004</factor>
+						<max>0.001</max>
+					</alpha>
+				</color>
+				<size>
+					<value>0.05</value>
+				</size>
+			</start>
+
+			<end>
+				<color>
+					<red>
+						<value>0.8</value>
+					</red>
+					<green>
+						<value>0.8</value>
+					</green>
+					<blue>
+						<value>1.0</value>
+					</blue>
+					<alpha>
+						<property>rotors/main/rpm</property>
+						<factor>0.0002</factor>
+						<max>0.004</max>
+					</alpha>
+				</color>
+				<size>
+					<value>2.0</value>
+				</size>
+			</end>
+
+			<life-sec>
+				<value>0.5</value>
+			</life-sec>
+			<mass-kg>0.001</mass-kg>
+			<radius-m>0.01</radius-m>
+		</particle>
+
+		<program>
+			<fluid>water</fluid>
+			<gravity>false</gravity>
 			<wind>false</wind>
 		</program>
 	</particlesystem>
@@ -353,10 +580,16 @@
     <type>select</type>
     <object-name>shadowOSG</object-name>
     <condition>
+      <and>
       <equals>
         <property>/sim/rendering/rembrandt/enabled</property>
         <value>false</value>
       </equals>
+      <equals>
+        <property>/sim/replay/replay-state</property>
+        <value>0</value>
+      </equals>
+      </and>
     </condition>
   </animation>
 
@@ -399,6 +632,7 @@
     <object-name>RH-door-int</object-name>
     <object-name>RH-door-ws</object-name>
     <object-name>RH-FR-handle</object-name>
+    <object-name>FRDR-glass-RH.001</object-name>
     <property>instrumentation/doors/crew/position-norm</property>
     <interpolation>
       <entry><ind> 0.00 </ind><dep> 0 </dep></entry>
@@ -426,6 +660,7 @@
     <object-name>LH-door-int</object-name>
     <object-name>LH-door-ws</object-name>
     <object-name>LH-FR-handle</object-name>
+    <object-name>FRDR-glass-LH.001</object-name>
     <property>instrumentation/doors/crew/position-norm</property>
     <interpolation>
       <entry><ind> 0.00 </ind><dep> 0 </dep></entry>

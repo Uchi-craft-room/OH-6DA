@@ -5,7 +5,7 @@
 
 		<description>MDHelicopters OH-6DA (YASim)</description>
 		<author>Hitoshi Uchida(3D/FDM)</author>
-		<status>1.1</status>
+		<status>1.2</status>
 		<license>GPL v2</license>
 
 		<flight-model>yasim</flight-model>
@@ -96,16 +96,14 @@
 	
   <multiplay>
    <generic>
-        <!-- Nav lights on -->
-      <int n="0" alias="/controls/switches/nav-lights-switch" />
-      <!-- Beacon on -->
-      <int n="1" alias="/controls/switches/beacon-switch" />
-      <!-- Landing lights on -->
-      <int n="2" alias="/controls/switches/landing-lights-switch" />
-	    <!-- Taxi light on -->
-      <int n="3" alias="/controls/switches/strobe-switch" />
-      <!-- Crashed -->
-      <int n="7" alias="/sim/crashed" />
+      <int n="0" alias="/controls/lighting/nav-lights" /><!-- Nav lights on -->
+      <int n="1" alias="/controls/lighting/beacon" /><!-- Beacon on -->
+      <int n="2" alias="/lightpack/beacon-state/state" /><!-- Beacon on -->
+      <int n="3" alias="/sim/crashed" /><!-- Crashed -->
+
+      <float n="0" alias="/instrumentation/doors/crew/position-norm"/><!--door-->
+      <float n="1" alias="/controls/switches/landing-light" /><!-- Landing lights on -->
+      
     </generic>
   </multiplay>
 

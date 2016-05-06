@@ -82,3 +82,17 @@ setlistener("/controls/engines/engine[0]/starter",func{interpolate("/engines/eng
 #########################  SWITCH SETTING ############################################
 setprop("/controls/gear/gear-down",0);
 
+######################### CANOPY PARAMETOR ##########################################
+#splash
+setlistener("/engines/engine[0]/n2-pct",func{
+             interpolate("/environment/aircraft-effects/splash-vector-x",(getprop("/velocities/airspeed-kt")+getprop("/engines/engine[0]/n2-pct"))*-0.01,1)});
+props.globals.getNode("/environment/aircraft-effects/splash-vector-y", 0).setIntValue(0.01);
+props.globals.getNode("/environment/aircraft-effects/splash-vector-z", 0).setIntValue(-1);
+
+#frost
+setprop("/environment/windowheat-level", 1);
+setlistener("/engines/engine[0]/n2-pct",func{
+             interpolate("/environment/aircraft-effects/frost-level",(getprop("/environment/temperature-degc")+10)*getprop("/environment/windowheat-level")*-0.05,1)});
+setlistener("/controls/anti-ice/window-heat",func{
+             interpolate("/environment/windowheat-level",1-getprop("/controls/anti-ice/window-heat")*0.9,10)});
+

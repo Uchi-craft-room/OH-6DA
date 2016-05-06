@@ -305,6 +305,7 @@
     </offsets>
   </model>
 
+
   <model>
     <path>Aircraft/OH-6DA/Models/Interior/Instruments/COMM/uhf.xml</path>
     <offsets>
@@ -366,7 +367,6 @@
     </offsets>
   </model>
 
-
   <model>
     <path>Aircraft/OH-6DA/Models/Interior/Instruments/LT/LT.xml</path>
     <offsets>
@@ -379,6 +379,31 @@
     </offsets>
   </model>
 
+<!-- DEFROST -->
+  <model>
+    <path>Aircraft/OH-6DA/Models/Interior/Instruments/switches/defrost.xml</path>
+    <offsets>
+      <x-m> -1.848 </x-m>
+      <y-m> -0.015</y-m>
+      <z-m> 0.230 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg> -90 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+<!-- PITOT -->
+  <model>
+    <path>Aircraft/OH-6DA/Models/Interior/Instruments/switches/anti-ice-pitot.xml</path>
+    <offsets>
+      <x-m> -1.848 </x-m>
+      <y-m> 0.040</y-m>
+      <z-m> 0.230 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg> -90 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
 
   <model>
     <path>Aircraft/OH-6DA/Models/Interior/Instruments/switches/master.xml</path>

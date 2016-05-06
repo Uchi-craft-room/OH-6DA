@@ -153,15 +153,15 @@
 </hstab>
 
 <!-- left skid -->
-<gear x="1.5" y="+0.9" z="-1.70" skid="1" compression="0.05" spring="0.9" sfric="0.85" dfric="0.7"/>
-<gear x="-0.6" y="+0.9" z="-1.65" skid="1" compression="0.05" spring="0.9" sfric="0.85" dfric="0.7"/>
+<gear x="1.6" y="0.9" z="-1.73" skid="1" compression="0.1" spring="0.95" sfric="1" dfric="0.8"/>
+<gear x="-0.7" y="0.9" z="-1.70" skid="1" compression="0.1" spring="0.95" sfric="1" dfric="0.8"/>
  
 <!-- right skid -->
-<gear x="1.5" y="-0.9" z="-1.70" skid="1" compression="0.05" spring="0.9" sfric="0.85" dfric="0.7"/>
-<gear x="-0.6" y="-0.9" z="-1.65" skid="1" compression="0.05" spring="0.9" sfric="0.85" dfric="0.7"/>
+<gear x="1.6" y="-0.9" z="-1.73" skid="1" compression="0.1" spring="0.95" sfric="1" dfric="0.8"/>
+<gear x="-0.7" y="-0.9" z="-1.70" skid="1" compression="0.1" spring="0.95" sfric="1" dfric="0.8"/>
  
 <!-- tail skid -->
-<gear x="-4.5" y="0.13" z="-0.8" skid="1" compression="0.01" spring="0.1" sfric="1" dfric="1"/>
+<gear x="-4.5" y="0.13" z="-0.9" skid="1" compression="0.1" spring="0.95" sfric="1" dfric="1"/>
 
 <!-- CARRIER -->
 
@@ -196,11 +196,11 @@
 <tank x="0.3" y="0" z="-1" capacity="303"/> 
 <tank x="-0.5" y="0" z="-0.7" capacity="100"/> 
 
-<ballast x="-0.7" y=" 0  " z="-0.5 " mass="300"/>
-<ballast x="-0.2" y=" 0  " z=" 0.3 " mass="100"/>
-<ballast x=" 1.2" y=" 0  " z="-0.8 " mass="200"/>
-<ballast x=" 0.7" y=" 0.3" z="-0.55" mass="150"/>
-<ballast x=" 0.7" y="-0.3" z="-0.55" mass="150"/>
+<ballast x="-0.7" y=" 0  " z="-0.5 " mass="400"/>
+<ballast x="-0.2" y=" 0  " z=" 0.3 " mass="200"/>
+<ballast x=" 1.2" y=" 0  " z="-0.8 " mass="300"/>
+<ballast x=" 0.7" y=" 0.9" z="-0.55" mass="250"/>
+<ballast x=" 0.7" y="-0.9" z="-0.55" mass="250"/>
 
  <thruster x="-0.6"  y="0.00" z="-1.7" vx="1" vy="0" vz="0" thrust="30">
       <control-input axis="/sim/model/pushback/target-speed-fps" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
