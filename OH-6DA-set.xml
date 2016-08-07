@@ -5,8 +5,7 @@
 
 		<description>MDHelicopters OH-6DA (YASim)</description>
 		<author>Hitoshi Uchida(3D/FDM)</author>
-		<status>1.2</status>
-		<license>GPL v2</license>
+		<status>v1.3</status>
 
 		<flight-model>yasim</flight-model>
 		<aero>OH-6DA</aero>
