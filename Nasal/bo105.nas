@@ -1,8 +1,6 @@
 # (c) Melchior FRANZ  < mfranz # flightgear : org >
 
 
-
-
 if (!contains(globals, "cprint"))
 	var cprint = func nil;
 
@@ -51,7 +49,6 @@ var nav_light_loop = func {
 }
 
 nav_light_loop();
-
 
 
 # doors =============================================================
@@ -155,11 +152,11 @@ var fuel = {
 		}
 
 		# low fuel warning [POH "General Description" 0.28a]
-		#var time = elapsedN.getValue();
-		#if (time > me.warntime and me.supply.level() * GAL2KG < 60) {
-			#screen.log.write("LOW FUEL WARNING", 1, 0, 0);
-			#me.warntime = time + screen.log.autoscroll * 2;
-		#}
+		var time = elapsedN.getValue();
+		if (time > me.warntime and me.supply.level() * GAL2KG < 20) {
+			screen.log.write("LOW FUEL WARNING", 1, 0, 0);
+			me.warntime = time + screen.log.autoscroll * 2;
+		}
 
 		var level = me.main.level() + me.supply.level();
 		me.total_galN.setDoubleValue(level);
@@ -644,7 +641,7 @@ var vibration = { # and noise ...
 	},
 	update: func(dt) {
 		var airspeed = me.airspeedN.getValue();
-		if (airspeed > 141) { # overspeed vibration
+		if (airspeed > 120) { # overspeed vibration
 			var frequency = 2000 + 500 * rand();
 			var v = 0.49 + 0.5 * normatan(airspeed - 160, 10);
 			var intensity = v;
@@ -1274,7 +1271,7 @@ var reconfigure = func {
 var delta_time = props.globals.getNode("/sim/time/delta-sec", 1);
 var hi_heading = props.globals.getNode("/instrumentation/heading-indicator/indicated-heading-deg", 1);
 var vertspeed = props.globals.initNode("/velocities/vertical-speed-fps");
-var gross_weight_lb = props.globals.initNode("/yasim/gross-weight-lbs");
+var gross_weight_lb = props.globals.initNode("/fdm/yasim/gross-weight-lbs");
 var gross_weight_kg = props.globals.initNode("/sim/model/gross-weight-kg");
 props.globals.getNode("/instrumentation/adf/rotation-deg", 1).alias(hi_heading);
 
@@ -1284,7 +1281,7 @@ var main_loop = func {
 	if (replay)
 		setprop("/position/gear-agl-m", getprop("/position/altitude-agl-ft") * 0.3 - 1.2);
 	vert_speed_fpm.setDoubleValue(vertspeed.getValue() * 60);
-	gross_weight_kg.setDoubleValue(gross_weight_lb.getValue() * LB2KG);
+	gross_weight_kg.setDoubleValue(gross_weight_lb.getValue() or 0 * LB2KG);
 
 
 	var dt = delta_time.getValue();
@@ -1312,7 +1309,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 	if (!first_init) return;
 	first_init = 0;
 
-	gui.menuEnable("autopilot", 1);
+	gui.menuEnable("autopilot", 0);
 	init_rotoranim();
 	vibration.init();
 	engines.init();
