@@ -20,7 +20,7 @@ var min = func(a, b) a < b ? a : b;
 
 
 # timers ============================================================
-aircraft.timer.new("/sim/time/hobbs/helicopter", nil).start();
+aircraft.timer.new("sim/time/hobbs/helicopter", nil).start();
 
 # strobes ===========================================================
 var strobe_switch = props.globals.initNode("controls/lighting/strobe", 1, "BOOL");
@@ -90,7 +90,7 @@ var Doors = {
 
 # density = 6.682 lb/gal [Flight Manual Section 9.2]
 # avtur/JET A-1/JP-8
-var FUEL_DENSITY = getprop("/consumables/fuel/tank/density-ppg"); # pound per gallon
+var FUEL_DENSITY = getprop("consumables/fuel/tank/density-ppg"); # pound per gallon
 var GAL2LB = FUEL_DENSITY;
 var LB2GAL = 1 / GAL2LB;
 var KG2GAL = KG2LB * LB2GAL;
@@ -127,7 +127,7 @@ var Tank = {
 
 var fuel = {
 	init: func {
-		var fuel = props.globals.getNode("/consumables/fuel");
+		var fuel = props.globals.getNode("consumables/fuel");
 		me.pump_capacity = 6.6 * L2GAL / 60; # same pumps for transfer and supply; from ec135: 6.6 l/min
 		me.total_galN = fuel.getNode("total-fuel-gals", 1);
 		me.total_lbN = fuel.getNode("total-fuel-lbs", 1);
@@ -138,7 +138,7 @@ var fuel = {
 		var sw = props.globals.getNode("/controls/switches");
 		setlistener(sw.initNode("fuel/transfer-pump[0]", 1, "BOOL"), func(n) me.trans1 = n.getValue(), 1);
 		setlistener(sw.initNode("fuel/transfer-pump[1]", 1, "BOOL"), func(n) me.trans2 = n.getValue(), 1);
-		setlistener("/sim/freeze/fuel", func(n) me.freeze = n.getBoolValue(), 1);
+		setlistener("sim/freeze/fuel", func(n) me.freeze = n.getBoolValue(), 1);
 		me.capacity = me.main.capacity + me.supply.capacity;
 		me.warntime = 0;
 		me.update(0);
@@ -189,7 +189,7 @@ var Engine = {
 		var m = { parents: [Engine] };
 		m.in = props.globals.getNode("controls/engines", 1).getChild("engine", n, 1);
 		m.out = props.globals.getNode("engines", 1).getChild("engine", n, 1);
-		m.airtempN = props.globals.getNode("/environment/temperature-degc");
+		m.airtempN = props.globals.getNode("environment/temperature-degc");
 
 		# input
 		m.ignitionN = m.in.initNode("ignition", 0, "BOOL");
@@ -208,8 +208,8 @@ var Engine = {
 		m.starterLP = aircraft.lowpass.new(3);
 		m.n1LP = aircraft.lowpass.new(4);
 		m.n2LP = aircraft.lowpass.new(4);
-		setlistener("/sim/signals/reinit", func(n) n.getValue() or m.reset(), 1);
-		m.timer = aircraft.timer.new("/sim/time/hobbs/turbines[" ~ n ~ "]", 10);
+		setlistener("sim/signals/reinit", func(n) n.getValue() or m.reset(), 1);
+		m.timer = aircraft.timer.new("sim/time/hobbs/turbines[" ~ n ~ "]", 10);
 		m.running = 0;
 		m.fuelflow = 0;
 		m.n1 = -1;
@@ -325,9 +325,9 @@ var Engine = {
 var engines = {
 	init: func {
 		me.engine = [Engine.new(0), Engine.new(1)];
-		me.trimN = props.globals.initNode("/controls/engines/power-trim");
-		me.balanceN = props.globals.initNode("/controls/engines/power-balance");
-		me.commonrpmN = props.globals.initNode("/engines/engine/rpm");
+		me.trimN = props.globals.initNode("controls/engines/power-trim");
+		me.balanceN = props.globals.initNode("controls/engines/power-balance");
+		me.commonrpmN = props.globals.initNode("engines/engine/rpm");
 	},
 	reset: func {
 		me.engine[0].reset();
@@ -388,12 +388,12 @@ var engines = {
 
 
 
-var vert_speed_fpm = props.globals.initNode("/velocities/vertical-speed-fpm");
+var vert_speed_fpm = props.globals.initNode("velocities/vertical-speed-fpm");
 
 if (devel) {
-	setprop("/instrumentation/altimeter/setting-inhg", getprop("/environment/pressure-inhg"));
+	setprop("instrumentation/altimeter/setting-inhg", getprop("/environment/pressure-inhg"));
 
-	setlistener("/sim/signals/fdm-initialized", func {
+	setlistener("sim/signals/fdm-initialized", func {
 		settimer(func {
 			screen.property_display.x = 760;
 			screen.property_display.y = 200;
@@ -403,13 +403,13 @@ if (devel) {
 				torque_pct,
 				target_rel_rpm,
 				max_rel_torque,
-				"/controls/engines/power-trim",
-				"/controls/engines/power-balance",
-				"/consumables/fuel/total-fuel-gals",
+				"controls/engines/power-trim",
+				"controls/engines/power-balance",
+				"consumables/fuel/total-fuel-gals",
 				"L",
 				engines.engine[0].runningN,
 				engines.engine[0].ignitionN,
-				"/controls/engines/engine[0]/power",
+				"controls/engines/engine[0]/power",
 				engines.engine[0].n1_pctN,
 				engines.engine[0].n2_pctN,
 				engines.engine[0].totN,
@@ -418,20 +418,20 @@ if (devel) {
 				"R",
 				engines.engine[1].runningN,
 				engines.engine[1].ignitionN,
-				"/controls/engines/engine[1]/power",
+				"controls/engines/engine[1]/power",
 				engines.engine[1].n1_pctN,
 				engines.engine[1].n2_pctN,
 				engines.engine[1].totN,
 				#engines.engine[1].n1N,
 				#engines.engine[1].n2N,
 				"X",
-				"/sim/model/gross-weight-kg",
-				"/position/altitude-ft",
-				"/position/altitude-agl-ft",
-				"/instrumentation/altimeter/indicated-altitude-ft",
-				"/environment/temperature-degc",
+				"sim/model/gross-weight-kg",
+				"position/altitude-ft",
+				"position/altitude-agl-ft",
+				"instrumentation/altimeter/indicated-altitude-ft",
+				"environment/temperature-degc",
 				vert_speed_fpm,
-				"/velocities/airspeed-kt",
+				"velocities/airspeed-kt",
 			);
 		}, 1);
 	});
@@ -444,10 +444,10 @@ var mouse = {
 		me.x = me.y = nil;
 		me.savex = nil;
 		me.savey = nil;
-		setlistener("/sim/startup/xsize", func(n) me.centerx = int(n.getValue() / 2), 1);
-		setlistener("/sim/startup/ysize", func(n) me.centery = int(n.getValue() / 2), 1);
-		setlistener("/devices/status/mice/mouse/mode", func(n) me.mode = n.getValue(), 1);
-		setlistener("/devices/status/mice/mouse/button[1]", func(n) {
+		setlistener("sim/startup/xsize", func(n) me.centerx = int(n.getValue() / 2), 1);
+		setlistener("sim/startup/ysize", func(n) me.centery = int(n.getValue() / 2), 1);
+		setlistener("devices/status/mice/mouse/mode", func(n) me.mode = n.getValue(), 1);
+		setlistener("devices/status/mice/mouse/button[1]", func(n) {
 			me.mmb = n.getValue();
 			if (me.mode)
 				return;
@@ -460,8 +460,8 @@ var mouse = {
 				gui.setCursor(me.savex, me.savey, "pointer");
 			}
 		}, 1);
-		setlistener("/devices/status/mice/mouse/x", func(n) me.x = n.getValue(), 1);
-		setlistener("/devices/status/mice/mouse/y", func(n) me.update(me.y = n.getValue()), 1);
+		setlistener("devices/status/mice/mouse/x", func(n) me.x = n.getValue(), 1);
+		setlistener("devices/status/mice/mouse/y", func(n) me.update(me.y = n.getValue()), 1);
 	},
 	update: func {
 		if (me.mode or !me.mmb)
@@ -524,7 +524,7 @@ var procedure = {
 		# startup
 		if (me.stage == 1) {
 			cprint("", "1: press start button #1 -> spool up turbine #1 to N1 8.6--15%");
-			setprop("/controls/rotor/brake", 0);
+			setprop("controls/rotor/brake", 0);
 			engines.engine[0].ignitionN.setValue(1);
 			engines.engine[0].starterN.setValue(1);
 			me.next(4);
@@ -619,7 +619,7 @@ var update_torque = func(dt) {
 
 
 # blade vibration absorber pendulum
-var pendulum = props.globals.getNode("/sim/model/bo105/absorber-angle-deg", 1);
+var pendulum = props.globals.getNode("sim/model/bo105/absorber-angle-deg", 1);
 var update_absorber = func {
 	pendulum.setDoubleValue(90 * clamp(abs(rotor_rpm.getValue()) / 90));
 }
@@ -628,15 +628,15 @@ var update_absorber = func {
 
 var vibration = { # and noise ...
 	init: func {
-		me.lonN = props.globals.initNode("/rotors/main/vibration/longitudinal");
-		me.latN = props.globals.initNode("/rotors/main/vibration/lateral");
-		me.soundN = props.globals.initNode("/sim/sound/vibration");
-		me.airspeedN = props.globals.getNode("/velocities/airspeed-kt");
-		me.vertspeedN = props.globals.getNode("/velocities/vertical-speed-fps");
+		me.lonN = props.globals.initNode("rotors/main/vibration/longitudinal");
+		me.latN = props.globals.initNode("rotors/main/vibration/lateral");
+		me.soundN = props.globals.initNode("sim/sound/vibration");
+		me.airspeedN = props.globals.getNode("velocities/airspeed-kt");
+		me.vertspeedN = props.globals.getNode("velocities/vertical-speed-fps");
 
-		me.groundspeedN = props.globals.getNode("/velocities/groundspeed-kt");
-		me.speeddownN = props.globals.getNode("/velocities/speed-down-fps");
-		me.angleN = props.globals.initNode("/velocities/descent-angle-deg");
+		me.groundspeedN = props.globals.getNode("velocities/groundspeed-kt");
+		me.speeddownN = props.globals.getNode("velocities/speed-down-fps");
+		me.angleN = props.globals.initNode("velocities/descent-angle-deg");
 		me.dir = 0;
 	},
 	update: func(dt) {
@@ -1097,7 +1097,7 @@ var init_weapons = func {
 		me.select += 1;
 	}
 
-	setlistener("/sim/model/bo105/weapons/impact/HOT", func(n) {
+	setlistener("sim/model/bo105/weapons/impact/HOT", func(n) {
 		var node = props.globals.getNode(n.getValue(), 1);
 		var impact = geo.Coord.new().set_latlon(
 				node.getNode("impact/latitude-deg").getValue(),
@@ -1119,7 +1119,7 @@ var init_weapons = func {
 		}));
 	});
 
-	#setlistener("/sim/model/bo105/weapons/impact/MG", func(n) {
+	#setlistener("sim/model/bo105/weapons/impact/MG", func(n) {
 	#	var node = props.globals.getNode(n.getValue(), 1);
 	#	geo.put_model("Models/Airport/ils.xml",
 	#			node.getNode("impact/latitude-deg").getValue(),
@@ -1133,7 +1133,7 @@ var init_weapons = func {
 	var triggerL = setlistener("controls/armament/trigger", func(n) {
 		if (weapons != nil) {
 			var t = n.getBoolValue();
-			if (!getprop("/sim/ai/enabled")) {
+			if (!getprop("sim/ai/enabled")) {
 				print("*** weapons work only with --prop:sim/ai/enabled=1 ***");
 				return removelistener(triggerL);
 			}
@@ -1161,7 +1161,7 @@ var reload = func {
 
 # view management ===================================================
 
-var elapsedN = props.globals.getNode("/sim/time/elapsed-sec", 1);
+var elapsedN = props.globals.getNode("sim/time/elapsed-sec", 1);
 var flap_mode = 0;
 var down_time = 0;
 controls.flapsDown = func(v) {
@@ -1220,23 +1220,23 @@ dynamic_view.register(func {
 
 
 var adjust_fov = func {
-	var w = getprop("/sim/startup/xsize");
-	var h = getprop("/sim/startup/ysize");
+	var w = getprop("sim/startup/xsize");
+	var h = getprop("sim/startup/ysize");
 	var ar = clamp(max(w, h) / min(w, h), 0, 2);
 	var fov = 60 + (ar - (4 / 3)) * 10 / (16 / 9 - 4 / 3);
-	setprop("/sim/view/config/default-field-of-view-deg", fov);
+	setprop("sim/view/config/default-field-of-view-deg", fov);
 	if (internal)
-		setprop("/sim/current-view/config/default-field-of-view-deg", fov);
+		setprop("sim/current-view/config/default-field-of-view-deg", fov);
 }
 
-setlistener("/sim/startup/xsize", adjust_fov);
-setlistener("/sim/startup/ysize", adjust_fov, 1);
+setlistener("sim/startup/xsize", adjust_fov);
+setlistener("sim/startup/ysize", adjust_fov, 1);
 
 
 
 # livery/configuration ==============================================
 
-aircraft.livery.init("Aircraft/bo105/Models/Variants", "sim/model/bo105/name");
+#aircraft.livery.init("Aircraft/bo105/Models/Variants", "sim/model/bo105/name");
 
 var reconfigure = func {
 	if (weapons != nil) {
@@ -1244,20 +1244,20 @@ var reconfigure = func {
 		weapons = nil;
 	}
 
-	if (getprop("/sim/model/bo105/missiles"))
+	if (getprop("sim/model/bo105/missiles"))
 		weapons = HOT;
-	elsif (getprop("/sim/model/bo105/miniguns"))
+	elsif (getprop("sim/model/bo105/miniguns"))
 		weapons = MG;
 
 	if (weapons != nil)
 		weapons.enable();
 
-	var emblemN = props.globals.getNode("/sim/model/bo105/material/emblem/texture");
+	var emblemN = props.globals.getNode("sim/model/bo105/material/emblem/texture");
 	var emblem = emblemN.getValue();
 	if (emblem == "RED-CROSS")
 		emblemN.setValue(emblem = rc_emblem);
 	elsif (emblem == "INSIGNIA")
-		emblemN.setValue(emblem = getprop("/sim/model/bo105/insignia"));
+		emblemN.setValue(emblem = getprop("sim/model/bo105/insignia"));
 	if (substr(emblem, 0, 17) == "Textures/Emblems/")
 		emblem = substr(emblem, 17);
 	if (substr(emblem, -4) == ".png")
@@ -1268,18 +1268,18 @@ var reconfigure = func {
 
 
 # main() ============================================================
-var delta_time = props.globals.getNode("/sim/time/delta-sec", 1);
-var hi_heading = props.globals.getNode("/instrumentation/heading-indicator/indicated-heading-deg", 1);
-var vertspeed = props.globals.initNode("/velocities/vertical-speed-fps");
-var gross_weight_lb = props.globals.initNode("/fdm/yasim/gross-weight-lbs");
-var gross_weight_kg = props.globals.initNode("/sim/model/gross-weight-kg");
-props.globals.getNode("/instrumentation/adf/rotation-deg", 1).alias(hi_heading);
+var delta_time = props.globals.getNode("sim/time/delta-sec", 1);
+var hi_heading = props.globals.getNode("instrumentation/heading-indicator/indicated-heading-deg", 1);
+var vertspeed = props.globals.initNode("velocities/vertical-speed-fps");
+var gross_weight_lb = props.globals.initNode("fdm/yasim/gross-weight-lbs");
+var gross_weight_kg = props.globals.initNode("sim/model/gross-weight-kg");
+props.globals.getNode("instrumentation/adf/rotation-deg", 1).alias(hi_heading);
 
 
 var main_loop = func {
 	props.globals.removeChild("autopilot");
 	if (replay)
-		setprop("/position/gear-agl-m", getprop("/position/altitude-agl-ft") * 0.3 - 1.2);
+		setprop("position/gear-agl-m", getprop("position/altitude-agl-ft") * 0.3 - 1.2);
 	vert_speed_fpm.setDoubleValue(vertspeed.getValue() * 60);
 	gross_weight_kg.setDoubleValue(gross_weight_lb.getValue() or 0 * LB2KG);
 
@@ -1301,11 +1301,11 @@ var replay = 0;
 var crashed = 0;
 var rc_emblem = determine_emblem();
 var doors = Doors.new();
-var config_dialog = gui.Dialog.new("/sim/gui/dialogs/bo105/config/dialog", "Aircraft/bo105/Dialogs/config.xml");
+var config_dialog = gui.Dialog.new("sim/gui/dialogs/bo105/config/dialog", "Aircraft/OH-6DA/Dialogs/config.xml");
 
 var first_init = 1;
 
-setlistener("/sim/signals/fdm-initialized", func {
+setlistener("sim/signals/fdm-initialized", func {
 	if (!first_init) return;
 	first_init = 0;
 
@@ -1317,11 +1317,11 @@ setlistener("/sim/signals/fdm-initialized", func {
 	mouse.init();
 
 	init_weapons();
-	setlistener("/sim/model/livery/file", reconfigure, 1);
+	setlistener("sim/model/livery/file", reconfigure, 1);
 
 	collective.setDoubleValue(1);
 
-	setlistener("/sim/signals/reinit", func(n) {
+	setlistener("sim/signals/reinit", func(n) {
 		n.getBoolValue() and return;
 		cprint("32;1", "reinit");
 		procedure.reset();
@@ -1340,7 +1340,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 			crash(crashed = 1);
 	});
 
-	setlistener("/sim/freeze/replay-state", func(n) {
+	setlistener("sim/freeze/replay-state", func(n) {
 		replay = n.getValue();
 		cprint("33;1", replay ? "replay" : "pause");
 		if (crashed)
