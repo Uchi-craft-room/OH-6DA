@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 
-<airplane mass="1481" version="YASIM_VERSION_CURRENT">
+<airplane mass="2000" version="YASIM_VERSION_CURRENT">
 
 
 <approach speed="47" aoa="16">
-  <control-setting axis="/controls/engines/engine[0]/throttle" value="0.3"/>
+  <control-setting axis="controls/engines/engine[0]/throttle" value="0.3"/>
 </approach>
 
 <cruise speed="140" alt="0">
-  <control-setting axis="/controls/engines/engine[0]/throttle" value="1.0"/>
+  <control-setting axis="controls/engines/engine[0]/throttle" value="1.0"/>
 </cruise>
 
 <rotor name="main" x="0" y="0.0" z="0.75"
-  nx="0.1" ny="0.0" nz="1.0"
+  nx="0.03" ny="0.0" nz="1.0"
   fx="1" fy="0" fz="0"
   diameter="8.05"
   numblades="5"
-  weightperblade="75"
-  relbladecenter="0.5"
+  weightperblade="55"
+  relbladecenter="0.45"
   chord="0.25"
   twist="-8.5"
   taper="1"
@@ -55,15 +55,15 @@
   number-of-parts="8"
   number-of-segments="8"
   cyclic-factor="0.8"
-  downwashfactor="1.0"
+  downwashfactor="0.5"
   flap0factor="0"
   notorque="0"
   dragfactor="0.30">
-  <control-input axis="/controls/flight/aileron-trim" control="CYCLICAIL"/>
-  <control-input axis="/controls/flight/aileron" control="CYCLICAIL" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
-  <control-input axis="/controls/flight/elevator-trim" control="CYCLICELE"/>
-  <control-input axis="/controls/flight/elevator" control="CYCLICELE" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
-  <control-input axis="/controls/engines/engine[0]/throttle" control="COLLECTIVE" src0="0.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
+  <control-input axis="controls/flight/aileron-trim" control="CYCLICAIL"/>
+  <control-input axis="controls/flight/aileron" control="CYCLICAIL" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
+  <control-input axis="controls/flight/elevator-trim" control="CYCLICELE"/>
+  <control-input axis="controls/flight/elevator" control="CYCLICELE" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
+  <control-input axis="controls/engines/engine[0]/throttle" control="COLLECTIVE" src0="0.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
 </rotor>
 
 
@@ -71,7 +71,7 @@
   x="-4.65" y="0.3" z="0.0"
   nx="0.0" ny="-1" nz="0.0"
   fx="1" fy="0" fz="0"
-  diameter="1.4"
+  diameter="1.2"
   numblades="2"
   weightperblade="2"
   relbladecenter="0.7"
@@ -80,7 +80,7 @@
   rel-len-blade-start="0.33"
   rpm="2500"
   ccw="1"
-  maxcollective="15.0"
+  maxcollective="10.0"
   mincollective="-10"
   phi0="110"
   incidence-stall-zero-speed="9"
@@ -105,8 +105,8 @@
   number-of-parts="4"
   downwashfactor="1.0"
   notorque="0">
-  <control-input axis="/controls/flight/rudder-trim" control="COLLECTIVE" invert="true"/>
-  <control-input axis="/controls/flight/rudder" control="COLLECTIVE" invert="true" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
+  <control-input axis="controls/flight/rudder-trim" control="COLLECTIVE" invert="true"/>
+  <control-input axis="controls/flight/rudder" control="COLLECTIVE" invert="true" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
 </rotor>
 
 <!--  250-C20B TURBOSHAFT ENGINE -->
@@ -118,10 +118,10 @@
   rotorgear-friction="1.4"
   yasimdragfactor="10"
   yasimliftfactor="140">
-  <control-input axis="/controls/engines/engine[0]/magnetos" control="ROTORGEARENGINEON"/>
-  <control-input axis="/controls/rotor/brake" control="ROTORBRAKE" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
-  <control-input axis="/controls/rotor/reltarget" control="ROTORRELTARGET" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
-  <control-input axis="/controls/rotor/maxreltorque" control="ROTORENGINEMAXRELTORQUE" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
+  <control-input axis="controls/engines/engine[0]/magnetos" control="ROTORGEARENGINEON"/>
+  <control-input axis="controls/rotor/brake" control="ROTORBRAKE" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
+  <control-input axis="controls/rotor/reltarget" control="ROTORRELTARGET" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
+  <control-input axis="controls/rotor/maxreltorque" control="ROTORENGINEMAXRELTORQUE" src0="0.0" src1="1.0" dst0="0.0" dst1="1.0"/>
 </rotorgear>
 
 <cockpit x="0.7" y="-0.3" z="-0.05"/>
@@ -136,7 +136,7 @@
   <stall aoa="16" width="4" peak="1.5"/>
 </vstab>
 
-<vstab x="-4.3" y="-0.13" z="-0.7" taper="0.5" length="0.7" chord="0.5" sweep="20">
+<vstab x="-4.43" y="-0.13" z="-0.7" taper="1.9" length="0.7" chord="0.25" sweep="-12">
   <stall aoa="16" width="4" peak="1.5"/>
 </vstab>
 
@@ -148,7 +148,7 @@
   <stall aoa="16" width="4" peak="1.5"/>
 </vstab>
 
-<hstab x="-4.6" y="-0.13" z="1.0" taper="0.6" effectiveness="2.0" length="0.87" chord="0.52" sweep="0" incidence="0">
+<hstab x="-4.6" y="0" z="1.0" taper="0.6" effectiveness="2.0" length="0.87" chord="0.52" sweep="0" incidence="0">
   <stall aoa="0" width="0" peak="1.5"/>
 </hstab>
 
@@ -166,29 +166,29 @@
 <!-- CARRIER -->
 
   <gear x="1.5" y="0.9" z="-1.8" compression="0.1" spring="0.8" sfric = "0.5" dfric="0.4">
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+        <control-input axis="controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="controls/gear/brake-parking" control="BRAKE" split="true"/>
+        <control-input axis="controls/gear/gear-down" control="EXTEND"/>
         <control-speed control="EXTEND" transition-time="2"/>
         <control-output control="EXTEND" prop="gear/gear/position-norm"/>
   </gear>
 
   <gear x="1.5" y="-0.9" z="-1.8" compression="0.1" spring="0.8" sfric = "0.5" dfric="0.4">
-        <control-input axis="/controls/gear/brake-right" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+        <control-input axis="controls/gear/brake-right" control="BRAKE" split="true"/>
+        <control-input axis="controls/gear/brake-parking" control="BRAKE" split="true"/>
+        <control-input axis="controls/gear/gear-down" control="EXTEND"/>
         <control-speed control="EXTEND" transition-time="2"/>
   </gear>
 
   <gear x="-0.6" y="0.9" z="-1.8" compression="0.1" spring="0.8" sfric = "0.5" dfric="0.4">
-        <control-input axis="/controls/flight/rudder" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
-        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+        <control-input axis="controls/flight/rudder" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
+        <control-input axis="controls/gear/gear-down" control="EXTEND"/>
         <control-speed control="EXTEND" transition-time="2"/>
    </gear>
 
   <gear x="-0.6" y="-0.9" z="-1.8" compression="0.1" spring="0.8" sfric = "0.5" dfric="0.4">
-        <control-input axis="/controls/flight/rudder" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
-        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+        <control-input axis="controls/flight/rudder" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
+        <control-input axis="controls/gear/gear-down" control="EXTEND"/>
         <control-speed control="EXTEND" transition-time="2"/>
    </gear>
 
@@ -203,7 +203,7 @@
 <ballast x=" 0.7" y="-0.9" z="-0.55" mass="250"/>
 
  <thruster x="-0.6"  y="0.00" z="-1.7" vx="1" vy="0" vz="0" thrust="30">
-      <control-input axis="/sim/model/pushback/target-speed-fps" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+      <control-input axis="sim/model/pushback/target-speed-fps" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
  </thruster>
 
 </airplane>

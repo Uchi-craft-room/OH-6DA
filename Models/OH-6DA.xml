@@ -708,7 +708,16 @@
     <path>Aircraft/OH-6DA/Models/light/RedLight.xml</path>
     <offsets>
       <x-m> -1.85 </x-m>
-      <y-m> -0.9 </y-m>
+      <y-m> -0.95 </y-m>
+      <z-m> -1.5</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>effects/lights/procedural_light_nav_left.xml</path>
+    <offsets>
+      <x-m> -1.85 </x-m>
+      <y-m> -0.95 </y-m>
       <z-m> -1.5</z-m>
     </offsets>
   </model>
@@ -717,12 +726,20 @@
     <path>Aircraft/OH-6DA/Models/light/GreenLight.xml</path>
     <offsets>
       <x-m> -1.85 </x-m>
-      <y-m>  0.9 </y-m>
+      <y-m>  0.95 </y-m>
       <z-m> -1.5 </z-m>
     </offsets>
   </model>
 
 
+  <model>
+    <path>effects/lights/procedural_light_nav_right.xml</path>
+    <offsets>
+      <x-m> -1.85 </x-m>
+      <y-m>  0.95 </y-m>
+      <z-m> -1.5 </z-m>
+    </offsets>
+  </model>
 
   <model>
   <name>Tail-Light</name>
@@ -734,9 +751,22 @@
     </offsets>
   </model>
 
+  <model>
+  <name>Tail-Light-prc</name>
+    <path>effects/lights/procedural_light_nav_tail.xml</path>
+    <offsets>
+      <x-m> 4.93 </x-m>
+      <y-m>  0.12 </y-m>
+      <z-m> 1.05 </z-m>
+      <heading-deg> 180 </heading-deg>
+    </offsets>
+  </model>
+
+
   <animation>
     <type>select</type>
     <object-name>Tail-Light</object-name>
+    <object-name>Tail-Light-prc</object-name>
     <condition>
           <property>controls/lighting/nav-lights</property>
     </condition>
@@ -796,7 +826,7 @@
   </model>
 
 
-  <!--  light cone -->
+  <!--  Landing light -->
   <model>
     <name>Landing-Light</name>
     <path>Aircraft/OH-6DA/Models/light/light-cone.xml</path>
@@ -809,18 +839,6 @@
     </offsets>
   </model>
 
-  <animation>
-    <type>select</type>
-    <object-name>Landing-Light</object-name>
-    <condition>
-        <equals>
-          <property>controls/switches/landing-light</property>
-          <value> 1 </value>
-        </equals>
-    </condition>
-  </animation> 
-
-<!-- Wing light cone--> 
   <model>
     <name>LandingLight</name>
    <path>Aircraft/OH-6DA/Models/light/Landinglight.xml</path>
@@ -832,9 +850,22 @@
     </offsets>
   </model>
 
+  <model>
+    <name>LandingLight-prc</name>
+    <path>effects/lights/procedural_light_nav_tail.xml</path>
+    <offsets>
+      <x-m> -1.80</x-m>
+      <y-m>  0.00 </y-m>
+      <z-m>  -1.00 </z-m>
+    </offsets>
+  </model>
+
+
   <animation>
     <type>select</type>
+    <object-name>Landing-Light</object-name>
     <object-name>LandingLight</object-name>
+    <object-name>LandingLight-prc</object-name>
     <condition>
         <equals>
           <property>controls/switches/landing-light</property>
